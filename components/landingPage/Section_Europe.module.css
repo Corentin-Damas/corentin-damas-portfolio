@@ -1,0 +1,110 @@
+.section__eu {
+  position: relative;
+  margin-bottom: var(--spacing-L);
+  margin-top: var(--spacing-L);
+
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: calc(6.25rem + var(--spacing-M));
+
+  @media only screen and (max-width: 65em) {
+    gap: var(--spacing-M);
+  }
+
+  @media only screen and (max-width: 37.5em) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+.section__block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-XS);
+}
+
+.block__img_containeur {
+  overflow: hidden;
+  transition: all var(--transi-time-M);
+  width: 100%;
+  height: 90vh;
+  @media only screen and (max-width: 65em) {
+    margin-top: var(--spacing-XS);
+    margin-bottom: var(--spacing-XS);
+    height: 70vh;
+  }
+}
+
+.block__img {
+  object-fit: cover;
+  position: relative;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+
+  transition: all var(--transi-time-M);
+}
+
+.block__img:hover {
+  transform: scale(var(--hover-scaling));
+}
+
+.block__legend {
+  text-align: right;
+  position: relative;
+  justify-self: right;
+  align-self: flex-end;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-XS);
+
+  @media only screen and (max-width: 65em) {
+    padding-right: 0px;
+    align-self: flex-end;
+  }
+}
+
+.block__legend_txt {
+  font-family: var(--font-legend);
+  font-weight: var(--font-body-regular);
+  font-style: italic;
+  font-size: var(--font-size-bodyText_01);
+  letter-spacing: var(--letter-spacing-XS);
+  color: var(--font-color-main);
+  position: relative;
+  cursor: pointer;
+  height: var(--font-heading);
+}
+
+.block__legend_txt:before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  height: 1px;
+  width: 0;
+  background-color: var(--rules-color);
+  transition: width var(--transi-time-S) ease-in-out;
+}
+
+.block__legend_txt:hover:before {
+  width: calc(100% - var(--spacing-S) - var(--spacing-XS));
+}
+.block__legend_txt:hover{
+  opacity: 0.7;
+}
+
+
+.verticalRule {
+  border-left: 1px solid var(--font-color-main);
+  height: var(--spacing-M);
+}
+
+.link_txt:active {
+  border-bottom: 1px solid var(--prim-500-main);
+}

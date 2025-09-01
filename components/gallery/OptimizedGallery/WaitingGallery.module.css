@@ -1,0 +1,46 @@
+/* Gallery grid skeleton */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.galleryItem {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    var(--netral-100) 8%,
+    var(--netral-200) 18%,
+    var(--netral-100) 33%
+  );
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+/* Shimmer animation */
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+/* Dark mode styles */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .heroImage {
+    height: 30vh;
+  }
+}

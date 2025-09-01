@@ -1,0 +1,21 @@
+.story__container {
+  margin-top: var(--spacing-M);
+  position: relative;
+  width: 100%;
+  padding: var(--spacing-M) 0;
+  @media only screen and (max-width: 45.25em) {
+    border-top: 1px solid white;
+  }
+}
+.storyHeading {
+  margin-bottom: var(--spacing-SM);
+}
+
+.storyTitle {
+  font-family: var(--font-lora);
+  font-size: var(--font-size-subTitle_03);
+  font-weight: 500;
+  color: var(--font-color-main);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-S);
+}

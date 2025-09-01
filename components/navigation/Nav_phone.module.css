@@ -1,0 +1,115 @@
+.mobile_nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 920;
+  width: 100%;
+
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(30px) brightness(0.8);
+  border-bottom: 1px solid var(--rules-color);
+  padding-inline: var(--padding-inLine);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition: height 0.3s ease;
+  @media only screen and (min-width: 65em) {
+    display: none;
+  }
+}
+
+.mobile_nav__actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-SS);
+}
+
+.mobile_menu_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  /* border: 1px solid var(--font-color-main); */
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--font-color-main);
+  font-size: var(--icone-XS);
+
+  z-index: 930;
+  position: relative;
+  border: none;
+}
+
+.mobile_menu_button:hover {
+  transform: scale(1.1);
+  background-color: rgba(var(--font-color-main-rgb), 0.1);
+}
+
+.mobile_menu_button:focus-visible {
+  outline: 2px solid var(--prim-500);
+  outline-offset: 2px;
+}
+
+.mobile_menu {
+  height: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--border-menu);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: height 0.3s ease, opacity 0.3s ease;
+  z-index: 910;
+}
+
+.mobile_menu.open {
+  transition: height 0.3s ease, opacity 0.3s ease;
+
+  opacity: 1;
+  height: 60vh;
+  visibility: visible;
+}
+
+.mobile_nav__menu {
+  padding: var(--spacing-LM) var(--padding-inLine);
+}
+
+.mobile_menu.open .mobile_nav_list {
+  transform: translateY(0);
+}
+
+.mobile_nav_list {
+  list-style: none;
+  transform: translateY(-100%);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-M);
+  transition: transform 0.3s ease;
+}
+
+.mobile_nav_list li {
+  text-align: center;
+}
+
+.link {
+  font-family: var(--font-display);
+  font-size: var(--font-size-subTitle_02);
+  font-weight: var(--font-display-medium);
+  color: var(--font-color-main);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--prim-500);
+  outline-offset: 4px;
+}

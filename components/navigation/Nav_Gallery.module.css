@@ -1,0 +1,98 @@
+.nav {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--spacing-M);
+  letter-spacing: var(--letter-spacing-XS);
+}
+
+.links__list {
+  font-family: var(--font-display);
+  font-size: var(--font-size-bodyText_01);
+  font-weight: var(--font-display-regular);
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--spacing-S);
+}
+
+.links__list_name {
+  font-family: var(--font-display);
+  font-weight: var(--font-display-medium);
+  font-size: var(--font-size-bodyText_01);
+  padding-bottom: var(--spacing-XXS);
+  margin-bottom: var(--spacing-XS);
+  border-bottom: 1px solid var(--rules-color);
+  color: var(--font-color-sec);
+  width: 100%;
+}
+
+.link__group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: flex-start;
+  gap: var(--spacing-S);
+  margin-bottom: var(--spacing-M);
+  width: 100%;
+}
+
+.link__li {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-XS);
+  width: 100%;
+  cursor: pointer;
+  transition: transform var(--transi-time-S) ease;
+
+  &:hover {
+    transform: translateX(0);
+  }
+}
+
+.link__li_title {
+  font-family: var(--font-body);
+  font-weight: var(--font-body-regular);
+  font-size: var(--font-size-bodyText_01);
+  color: var(--font-color-main);
+  transition: color var(--transi-time-S) ease;
+}
+
+.currPage {
+  color: var(--current-project);
+  font-weight: var(--font-body-medium);
+}
+.currPage::after {
+content: '_>';
+}
+
+.number {
+  min-width: max-content;
+  font-family: var(--font-display);
+  font-weight: var(--font-body-hair);
+
+  font-size: var(--font-size-bodyText_02);
+}
+
+.link__li_title:before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  height: 1px;
+  width: 0;
+  background-color: var(--rules-color);
+  transition: width var(--transi-time-S) ease-in-out;
+}
+
+.link__li:hover .link__li_title{
+  opacity:0.7;
+}
+.link__li:hover .link__li_title:before{
+width: 100px;
+}

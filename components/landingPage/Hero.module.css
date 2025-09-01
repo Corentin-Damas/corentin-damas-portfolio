@@ -1,0 +1,106 @@
+.hero {
+  margin-bottom: var(--spacing-XM);
+
+  @media only screen and (max-width: 65em) {
+    margin-top: var(--nav-height);
+
+  }
+}
+.hero__background_containeur {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.bgDark,
+.bglight {
+  object-fit: cover;
+}
+
+.hero__content_containeur {
+  position: relative;
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: var(--spacing-LM);
+  height: calc(var(--window-height) - (var(--nav-height)));
+  @media only screen and (max-width: 65em) {
+    gap: var(--spacing-LM);
+    padding-bottom: 0;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+}
+
+.presentation_containeur {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.presentation {
+  text-shadow: 1px 2px 2px var(--text-shadow);
+  /* text-shadow: 3px 3px 4px var(--underline-neutral); */
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+    @media only screen and (max-width: 65em) {
+    align-items: flex-start;
+  }
+  @media only screen and (max-width: 27em){
+      align-items: center;
+  }
+}
+
+.presentation__txt {
+  font-family: var(--font-display);
+  font-weight: var(--font-display-regular);
+  font-size: var(--font-size-Title_02);
+  color: var(--font-color-main);
+  margin-bottom: var(--spacing-XS);
+  
+  @media only screen and (max-width: 65em) {
+    font-size: var(--font-size-subTitle_01);
+
+  }
+}
+
+.img_caption__containeur { 
+  font-family: var(--font-body);
+  font-size: var(--font-size-bodyText_03);
+  font-weight: var(--font-body-regular);
+  line-height: var(--line-height-body_03);
+  letter-spacing: var(--letter-spacing-XS);
+  color: var(--font-color-main);
+  align-self: flex-end;
+  text-align: right;
+  border-right: 1px solid var(--font-color-sec);
+  padding: var(--spacing-SS) var(--spacing-XS);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-XS);
+  
+}
+
+.sec_txt {
+  font-family: var(--font-japanese);
+  font-size: var(--font-size-bodyText_02);
+  line-height: var(--line-height-body_02);
+}
+
+.header {
+  position: relative;
+  height: var(--window-height);
+  padding-top: var(--spacing-LM);
+}

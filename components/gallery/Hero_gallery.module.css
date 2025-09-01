@@ -1,0 +1,58 @@
+.heroSection {
+  position: relative;
+  padding: var(--spacing-M) 0;
+  border-bottom: 1px solid var(--rules-color);
+  margin-bottom: var(--spacing-M);
+  width: 100%;
+  @media only screen and (max-width: 45.25em){
+    margin-top: var(--spacing-S);
+  } 
+}
+
+.title_container {
+  text-align: left;
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap:0px;
+}
+
+.title_txt {
+  font-family: var(--font-display);
+  font-weight: var(--font-display-bold);
+  font-size: var(--font-size-Title_02);
+  letter-spacing: var(--letter-spacing-XS);
+  color: var(--font-color-main);
+  margin-bottom: var(--spacing-S);
+
+  @media only screen and (max-width: 600px) {
+    font-size: var(--font-size-Title_03);
+  }
+}
+
+.keywords {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--spacing-S);
+  flex-wrap: wrap;
+}
+
+.presentation__sub_txt {
+  font-family: var(--font-body);
+  font-weight: var(--font-body-regular);
+  font-size: var(--font-size-bodyText_02);
+  color: var(--font-color-sec);
+
+  @media only screen and (max-width: 600px) {
+    font-size: var(--font-size-bodyText_03);
+  }
+}
+
+.DesktopText{
+  width: 100%;
+  @media only screen and (max-width: 45.25em){
+    display: none;
+  } 
+}

@@ -1,0 +1,14 @@
+.popUpInformation {
+  cursor: default;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, min(90vw, 360px));
+  grid-template-rows: auto;
+  gap: var(--spacing-SM);
+
+  font-size: var(--font-size-bodyText_01);
+  line-height: 1.6;
+  font-family: var(--font-lora);
+  color: var(--font-color-main);
+  opacity: 0.9;
+}

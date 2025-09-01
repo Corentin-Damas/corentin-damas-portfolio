@@ -1,0 +1,246 @@
+/* Section Contact - Layout principal border */
+.contactSection {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4rem 3fr 1fr;
+  grid-template-rows: repeat(2, max-content);
+  margin-top: var(--spacing-S);
+  margin-bottom: var(--spacing-L);
+
+  @media only screen and (max-width: 45.25em) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Label "Photographer" à gauche */
+.contactSection__label {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--font-size-bodyText_01);
+  letter-spacing: var(--letter-spacing-XS);
+  grid-column: 1/2;
+  grid-row: 1/2;
+  align-self: flex-start;
+  justify-self: flex-start;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  border-top: 1px solid var(--rules-color);
+  padding: 1rem;
+  padding-top: var(--spacing-S);
+  cursor: default;
+  @media only screen and (max-width: 45.25em) {
+    writing-mode: horizontal-tb;
+    border-top: none;
+    padding: 1rem 0;
+    padding-top: 0;
+    align-self: flex-end;
+    justify-self: flex-start;
+  }
+}
+
+/* Section de présentation */
+.contactSection__presentation {
+  border-top: 1px solid var(--rules-color);
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding: var(--spacing-S);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-M);
+  @media only screen and (max-width: 45.25em) {
+    justify-items: flex-start;
+    width: 100%;
+    gap: var(--spacing-S);
+    padding: var(--spacing-S) 0;
+  }
+}
+
+.presentation__name {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--font-size-subTitle_02);
+  line-height: 1em;
+  letter-spacing: var(--letter-spacing-XS);
+  margin: 0;
+}
+
+.presentation__services {
+  font-family: var(--font-raleway);
+  font-weight: 400;
+  font-size: var(--font-size-bodyText_02);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-XS);
+}
+
+.vertical_line {
+  width: 1px;
+  height: var(--spacing-SM);
+  background: var(--rules-color);
+  border-radius: 50%;
+}
+
+/* Section des informations de contact */
+.contactSection__info {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  padding: var(--spacing-S);
+  width: 100%;
+  overflow-x: hidden;
+  @media only screen and (max-width: 45.25em) {
+    padding: var(--spacing-S) 0;
+  }
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-LM);
+  @media only screen and (max-width: 45.25em) {
+    gap: var(--spacing-S);
+  }
+}
+
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-XS);
+}
+
+.contactLabel {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--font-size-subTitle_03);
+  color: var(--font-color-main);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-XS);
+  flex-wrap: wrap;
+}
+
+.contactLink {
+  font-family: var(--font-body);
+  font-size: var(--font-size-bodyText_01);
+  color: var(--font-color-main);
+  text-decoration: none;
+  padding: var(--spacing-XS) 0;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.contactLink:hover {
+  color: var(--sec-700);
+}
+
+/* Sidebar droite */
+.contactSection__sidebar {
+  grid-column: 3/4;
+  grid-row: 1/3;
+  border-top: 1px solid var(--rules-color);
+  border-left: 1px solid var(--rules-color);
+  padding: var(--spacing-S);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-S);
+  align-items: flex-start;
+  justify-items: flex-start;
+
+  @media only screen and (max-width: 45.25em) {
+    padding: 0;
+    border-top: none;
+    gap: var(--spacing-XS);
+    border-left: none;
+  }
+}
+
+.sidebar__image {
+  width: calc(100vw - var(--padding-inLine) * 2);
+  height: auto;
+  @media only screen and (min-width: 45.25em) {
+    max-width: 300px;
+  }
+}
+.profileImage {
+  object-fit: cover;
+  height: auto;
+}
+
+.sidebar__link {
+  align-self: flex-start;
+}
+
+/* - 720px (45.25em) - @media only screen and (max-width: 45.25em){} */
+/* Responsive design */
+@media only screen and (max-width: 65em) {
+  .contactSection__info {
+    grid-column: 2/5;
+  }
+
+  .contactInfo {
+    gap: var(--spacing-S);
+  }
+  .presentation__services {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .vertical_line {
+    width: var(--spacing-XS);
+    height: 1px;
+  }
+}
+
+@media only screen and (max-width: 45.25em) {
+  .contactSection__label {
+    grid-column: 1/-1;
+  }
+  .contactSection {
+    grid-template-rows: auto auto 2fr;
+  }
+
+  .contactSection__presentation {
+    grid-column: 2/5;
+  }
+
+  .contactSection__info {
+    grid-row: 3/4;
+    order: 2;
+  }
+
+  .profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .contactItem {
+    border: 1px solid ButtonText;
+  }
+
+  .contactItem:hover {
+    border-color: Highlight;
+  }
+
+  .contactLink {
+    color: LinkText;
+  }
+
+  .contactLink:hover {
+    color: Highlight;
+    border-bottom-color: Highlight;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .contactItem,
+  .contactLink {
+    transition: none;
+  }
+}

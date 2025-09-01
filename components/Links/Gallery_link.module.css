@@ -1,0 +1,39 @@
+.gallery_Link {
+  position: relative;
+  font-family: var(--font-heading);
+  color: var(--font-color-main);
+  letter-spacing: var(--letter-spacing-S);
+  font-size: var(--font-size-bodyText_02);
+  transition: transform var(--transi-time-M);
+}
+
+.gallery_Link:hover span {
+  color: var(--font-color-main);
+}
+
+.link_container {
+  width: max-content;
+}
+
+.gallery_Link:before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  height: 1px;
+  width: 0;
+  opacity: 0.5;
+  background-color: var(--font-color-main);
+  transition: width var(--transi-time-S) ease-in-out;
+}
+
+.gallery_Link:hover:before {
+  width: 75%;
+}
+
+.gallery_Link:hover {
+  opacity: 0.7;
+}
+
+.gallery_Link:active::before {
+  background-color: var(--font-color-main);
+}

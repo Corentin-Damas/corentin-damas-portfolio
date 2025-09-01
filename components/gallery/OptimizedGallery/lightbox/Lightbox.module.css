@@ -1,0 +1,428 @@
+/* === Overlay & Backdrop === sideTitle  */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--lightbox-background);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  z-index: 1001;
+}
+
+/* === Content & Stage === */
+.content_container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  pointer-events: none; /* on réactive sur enfants */
+  z-index: 1001;
+  @media only screen and (max-width: 65em) {
+    flex-direction: column;
+  }
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  pointer-events: auto;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  z-index: 1001;
+  touch-action: pan-y;
+  @media only screen and (max-width: 65em) {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.img {
+  padding: 2vmin 2vw 6vmin 2vw; /* espace haut/bas & gauche/droite */
+  object-fit: contain;
+  z-index: 1001;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* === Navigation Controls === */
+.nav,
+.close,
+.infoToggle,
+.sideClose {
+  position: absolute;
+  color: var(--icone-lightbox-color);
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 999px;
+  width: var(--icone-S);
+  height: var(--icone-S);
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(12px);
+  z-index: 1003;
+  border: 1px solid var(--icone-lightbox-border);
+}
+.nav,
+.close {
+  background: var(--icone-lightbox-background);
+}
+
+.nav {
+  bottom: 50%;
+  transform: translateY(50%);
+  @media only screen and (max-width: 65em) {
+    transform: translateY(0);
+    bottom: 2vmin;
+  }
+}
+
+.nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.prev {
+  left: 2vmin;
+}
+.next {
+  right: 2vmin;
+}
+
+.close {
+  top: 2vmin;
+  right: 2vmin;
+  transform: none;
+}
+
+.infoToggle {
+  bottom: 2vmin;
+  right: 2vmin;
+
+  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  @media only screen and (max-width: 65em) {
+    right: calc(50% - var(--icone-S) / 2);
+    bottom: 2vmin;
+  }
+}
+
+/* === Counter === */
+.counter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.5vmin;
+  text-align: center;
+  color: #cfd2d6;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 1003;
+  @media only screen and (max-width: 65em) {
+    top: 2vmin;
+  }
+}
+
+/* ======== Side Panel (pousse) ========= */
+/* width contrôlée via variable, 0 par défaut -> ne prend PAS de place quand fermé */
+.side {
+  --side-w: 0px;
+  --side-h: 0px;
+  position: relative;
+  width: var(--side-w);
+  overflow: hidden; /* masque le contenu quand fermé */
+  transform: translateX(100%); /* glisse hors écran quand fermé */
+  transition: width 0.18s ease-out, transform 0.18s ease-out;
+  background: rgba(10, 12, 16, 0.55);
+  -webkit-backdrop-filter: blur(18px) brightness(0.8);
+  backdrop-filter: blur(18px) brightness(0.8);
+  color: #e6e9ee;
+  border-left: 1px solid var(--icone-lightbox-border);
+  pointer-events: auto;
+  z-index: 1002;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media only screen and (max-width: 65em) {
+    width: 100%;
+    height: var(--side-h);
+    transform: translateY(100%);
+    transition: height 0.18s ease-out, transform 0.18s ease-out;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--spacing-S);
+  }
+}
+
+.sideOpen {
+  --side-w: min(360px, 85vw);
+  transform: translateX(0);
+  @media only screen and (max-width: 65em) {
+    --side-h: 270px;
+    transform: translateY(0);
+    overflow-y: auto;
+    padding-top: var(--spacing-SM);
+  }
+}
+
+.sideInner {
+  padding-left: var(--spacing-SM);
+}
+
+.sideTitle {
+  font-size: var(--font-size-subTitle_03);
+  margin-bottom: var(--spacing-SM);
+  @media only screen and (max-width: 65em) {
+    margin-bottom: var(--spacing-S);
+  }
+}
+
+.sideClose {
+  position: absolute;
+  top: 2vmin;
+  left: 2vmin;
+  border: 1px solid var(--icone-lightbox-border);
+  background: var(--icone-lightbox-background);
+  cursor: pointer;
+  backdrop-filter: blur(6px) brightness(2);
+  @media only screen and (max-width: 65em) {
+    top: 2vmin;
+    left: auto;
+    right: 2vmin;
+    transform: rotate(90deg);
+  }
+}
+
+/* === Color Palette === (dans l’aside, bas centré) */
+.palette_container {
+  position: absolute;
+  left: 50%;
+  bottom: 4rem;
+  transform: translateX(-50%);
+  pointer-events: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-SM);
+  @media only screen and (max-width: 65em) {
+    position: relative;
+    transform: translateX(0);
+    left: 0;
+    bottom: 0;
+  }
+}
+.palette {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-inline: var(--spacing-SM);
+  @media only screen and (max-width: 65em) {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--spacing-S);
+  }
+}
+
+.swatch {
+  width: var(--icone-S);
+  height: var(--icone-S);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  position: relative;
+  cursor: pointer;
+  background-clip: padding-box;
+  @media only screen and (max-width: 65em) {
+    width: var(--icone-XS);
+    height: var(--icone-XS);
+  }
+}
+
+.copied {
+  position: absolute;
+  bottom: 2vmin;
+  left: 50%;
+  width: max-content;
+  transform: translateX(-50%);
+  background-color: var(--sec-700);
+  padding: var(--spacing-XS) var(--spacing-M);
+  color: var(--netral-00);
+  font-size: var(--font-size-bodyText_02);
+  border-radius: 999px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  @media only screen and (max-width: 65em) {
+  }
+}
+
+/* === Metadata List === */
+.metaList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+
+  gap: var(--spacing-S);
+  font-size: 0.9rem;
+  @media only screen and (max-width: 65em) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    align-items: start;
+    justify-items: start;
+    row-gap: var(--spacing-SS);
+    column-gap: var(--spacing-M);
+  }
+}
+
+.ja {
+  font-family: var(--font-japanese);
+}
+
+.infoToggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35);
+}
+
+/* === Thème dynamique pour le bouton Info ===
+   Prend deux variables CSS: --info-c1 et --info-c2
+   Fallbacks intégrés si non définies.
+*/
+.infoColored {
+  /* gradient doux + lisibilité */
+  background-color: var(--netral-900);
+  background-image: radial-gradient(
+      at 92% 5%,
+      var(--info-c1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at -3% -10%, var(--info-c2) 0px, transparent 50%),
+    radial-gradient(at -4% 100%, var(--info-c3) 0px, transparent 50%),
+    radial-gradient(at 110% 105%, var(--info-c4) 0px, transparent 50%);
+  color: #fff;
+  text-shadow: 0 4px 8px rgba(18, 26, 34, 0.45);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+/* Hover/focus léger pour attirer l’œil sans voler la vedette */
+.infoColored:hover,
+.infoColored:focus-visible {
+  filter: saturate(1.05);
+}
+.palette_instruction {
+  @media only screen and (max-width: 65em) {
+    display: none;
+  }
+}
+
+/* Désactiver les boutons aux bords */
+.nav[disabled],
+.nav[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Wrapper d'animation + état de chargement */
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Cible l'élément média (image) */
+.media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* garde ton choix si différent */
+  opacity: 0;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Etat: loading / loaded */
+.frame[data-state="loaded"] .media {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* Petit loader (spinner) centré */
+.loader {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: currentColor;
+  animation: lb-spin 0.8s linear infinite;
+  opacity: 1;
+}
+@keyframes lb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Anim d’entrée selon la direction (suivante / précédente) */
+.frame[data-dir="next"] .media {
+  animation: lb-in-right 0.28s ease both;
+}
+.frame[data-dir="prev"] .media {
+  animation: lb-in-left 0.28s ease both;
+}
+
+@keyframes lb-in-right {
+  from {
+    transform: translateX(12%);
+    opacity: 0.001;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes lb-in-left {
+  from {
+    transform: translateX(-12%);
+    opacity: 0.001;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Respecte l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .frame[data-dir="next"] .media,
+  .frame[data-dir="prev"] .media {
+    animation: none;
+  }
+}

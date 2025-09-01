@@ -1,0 +1,72 @@
+.theme_button {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: transparent;
+  gap: var(--spacing-XS);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+
+  border-radius: 50%;
+}
+
+.special {
+  color: var(--font-color-main);
+  transition: color 0.2s ease;
+}
+
+.theme_button:hover .special {
+  color: var(--color-switch);
+  font-weight: 700;
+}
+
+.theme_button:focus-visible {
+  outline: 2px solid var(--prim-500-main);
+  outline-offset: 4px;
+}
+
+.icon {
+  user-select: none;
+  height: var(--icone-S);
+  width: var(--icone-S);
+}
+
+.theme_txt {
+  font-family: var(--font-legend);
+  text-align: left;
+  font-size: var(--font-size-bodyText_03);
+  color: var(--font-color-main);
+}
+
+.spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid var(--rules-color);
+  border-radius: 50%;
+  height: var(--icone-S);
+  width: var(--icone-S);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Visually hidden class for screen readers */
+.visually_hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

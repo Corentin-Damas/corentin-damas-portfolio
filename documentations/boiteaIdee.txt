@@ -1,0 +1,3 @@
+Au lieux d'avoir un théme personalisé par préférence utilisateur
+Avoir 3 théme, Jour(blanc), nuit(noir), heure dorée(rouge-orange) 
+en fonction de l'heure de la journée ( 1 call client en moins)
