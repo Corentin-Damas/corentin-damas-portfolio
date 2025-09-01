@@ -1,0 +1,126 @@
+/* Utility Classes & Components
+ * Contains reusable utility classes and small component styles
+ * Extracted from globals.css for better organization and performance
+ */
+
+/* Special Link */
+.presentation_sp_link {
+  margin-top: var(--special_link);
+}
+
+/* Animation States */
+.opaticity {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Not found page */
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  gap: var(--spacing-M);
+}
+
+.notFoundMyName {
+  font-family: var(--font-geologica-light);
+  font-weight: 300;
+}
+
+.notFoundTxt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-M);
+  /* 
+  padding: var(--spacing-S) var(--spacing-M);
+  background-color: var(--shop-info-transparency); 
+  */
+}
+
+.notFoundLogo {
+  width: var(--icone-S);
+  height: var(--icone-S);
+}
+
+.notFoundImg {
+  object-fit: cover;
+  height: auto;
+  width: 100%;
+  aspect-ratio: 20/9;
+  max-width: 600px;
+}
+.notFoundTitle {
+  border-right: 1px solid var(--rules-color);
+}
+
+.notFoundLink {
+  text-decoration: underline 1px var(--rules-color);
+}
+
+/* Dots and Indicators */
+.dot {
+  width: var(--font-size-bodyText_03);
+  height: var(--font-size-bodyText_03);
+  background: var(--prim-500);
+  border-radius: 50%;
+}
+
+/* Grain Texture - Performance Optimized */
+.grain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.4' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  filter: var(--grain-filter);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Ensure focus styles are visible */
+:focus-visible {
+  outline: 2px solid #0070f3;
+  outline-offset: 2px;
+}
+
+/* Remove focus styles for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.presentation_sp_link {
+  margin-top: var(--special_link);
+  background-color: red;
+}
+
+.opaticity {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* .unLoaded class is defined in utilities.css - removing duplicate */
+.btn-cta:disabled {
+  background-color: var(--netral-300);
+  opacity: 0.8;
+}

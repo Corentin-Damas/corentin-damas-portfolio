@@ -1,0 +1,64 @@
+:root {
+  /* Typography System - Font Families */
+  /* --font-display: var(--font-satoshi), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: var(--font-lora), Georgia, serif;
+  --font-body: var(--font-satoshi), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-legend: var(--font-lora), Georgia, serif;
+  --font-logo: var(--font-heading);
+  --font-japanese: var(--font-sawarabi), serif; */
+  --font-display: var(--font-gentium-plus), system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-gentium-plus), Times New Roman, Georgia, serif;
+  --font-body: var(--font-gentium-book-plus), system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-legend: var(--font-gentium-book-plus), Times New Roman, Georgia, serif;
+  --font-logo: var(--font-heading);
+  --font-japanese: var(--font-sawarabi), serif;
+
+  /* Font Styles */
+  --font-display-light: 400;
+  --font-display-regular: 400;
+  --font-display-medium: 700;
+  --font-display-bold: 700;
+
+  --font-heading-regular: 400;
+  --font-heading-medium: 400;
+  --font-heading-bold: 700;
+
+  --font-body-light: 400;
+  --font-body-regular: 400;
+  --font-body-medium: 700;
+  --font-body-bold: 700;
+
+  /* Typography - Font Sizes */
+  --font-size-Display_01: 6rem;
+  --font-size-Display_02: 4.5rem;
+  --font-size-Display_03: 3.75rem;
+
+  --font-size-Title_01: 3rem;
+  --font-size-Title_02: 2.625rem;
+  --font-size-Title_03: 2.25rem;
+
+  --font-size-subTitle_01: 2rem;
+  --font-size-subTitle_02: 1.5rem;
+  --font-size-subTitle_03: 1.313rem;
+
+  --font-size-bodyText_01: 1rem;
+  --font-size-bodyText_02: 0.875rem;
+  --font-size-bodyText_03: 0.75rem;
+  --font-size-detail_01: 0.625rem;
+  --font-size-detail_02: 0.5rem;
+
+  /* Line Heights */
+  --line-height-Title_01: 4.2rem;
+  --line-height-subTitle_03: 2.1rem;
+  --line-height-body_01: 1.563rem;
+  --line-height-body_02: 1.4rem;
+  --line-height-body_03: 1.063rem;
+
+  /* Letter Spacing */
+  --letter-spacing-N-XS: -0.5px;
+  --letter-spacing-XS: 1px;
+  --letter-spacing-S: 3px;
+  --letter-spacing-M: 5px;
+}

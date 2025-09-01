@@ -1,0 +1,106 @@
+/* Reset & Base Styles
+ * Contains all reset and base styles for the application
+ * Extracted from globals.css for better organization and performance
+ */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+*:focus-visible {
+  outline-color: var(--information);
+  outline-offset: 4px;
+  box-shadow: none;
+}
+
+*:active {
+  outline: none;
+}
+
+img,
+svg,
+picture {
+  max-width: 100%;
+  display: block;
+}
+/* html { scrollbar-gutter: stable both-edges; } */
+
+html,
+body {
+  max-width: 100vw;
+  /* overflow-x: hidden; */
+  background-color: var(--background-color);
+  box-sizing: border-box;
+  color: var(--font-color-main);
+  font-family: var(--font-body);
+  font-weight: var(--font-body-regular);
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Typography base styles */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: var(--font-display-bold);
+  margin: 0;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-medium);
+  margin: 0;
+}
+
+p,
+span,
+a,
+button,
+input,
+textarea,
+select,
+li {
+  font-family: var(--font-body);
+}
+
+.japanese-text {
+  font-family: var(--font-japanese);
+}
+
+/* 1) Adoucir/retirer le flash au toucher (mobile) */
+html {
+  -webkit-tap-highlight-color: transparent;
+} /* ou rgba(255,255,255,.08) */
+
+/* 2) Garder le focus pour clavier mais le cacher pour clic/touch */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 3) Focus accessible et discret (personnalise la couleur) */
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 8px; /* si tes boutons sont arrondis */
+}

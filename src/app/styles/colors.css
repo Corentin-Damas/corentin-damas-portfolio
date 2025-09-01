@@ -1,0 +1,111 @@
+/* Color System - Light Theme
+ * Contains all color tokens for the application
+ * Extracted from globals.css for better organization and performance
+ border-menu
+ */
+
+:root {
+  /* Netral Colors */
+  --netral-00: #f8fafc;
+  --netral-50: #eaecee;
+  --netral-100: #bdc3c9;
+  --netral-200: #9da6af;
+  --netral-201: rgb(157, 166, 175);
+  --netral-300: #717d8a;
+  --netral-400: #556473;
+  --netral-500: #2b3d50;
+  --netral-700: #1f2b39;
+  --netral-900: #121a22;
+  --netral-901: rgb(18, 26, 34);
+  --netral-black: #1a1a1a;
+
+  /* Primary Colors */
+  --prim-100: #f8c8c3;
+  --prim-300: #ef887c;
+  --prim-500: #e74d3c;
+  --prim-700: #a4372b;
+  --prim-900: #612019;
+
+  /* Secondary Colors */
+  --sec-50: #eaf2f8;
+  --sec-100: #bcd7e9;
+  --sec-300: #6fa9cf;
+  --sec-500: #287fb8;
+  --sec-700: #1c5a83;
+  --sec-900: #11354d;
+  --sec-901: rgb(17, 53, 77);
+
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #fcd34d;
+  --error: #ef4444;
+  --information: #0891b2;
+
+  /* Light Theme Colors (Default) */
+  --background-color: var(--netral-00);
+
+  --font-color-main: var(--netral-900);
+  --font-color-sec: var(--netral-500);
+  --font-color-gray: var(--netral-400);
+  --link-color-underline: var(--netral-300);
+  --rules-color: var(--netral-400);
+
+  --grain-filter: grayscale(1) brightness(1) opacity(0.3) contrast(3);
+
+  /* Nav */
+  --bg-nav: hsla(210, 40%, 98%, 0.6);
+  --color-switch: var(--prim-500);
+
+  /* Home */
+  --bg-memory-home: var(--netral-900);
+  --text-shadow: transparent;
+  --bg-footer: var(--netral-100);
+
+  /* Galerie */
+  --current-project: var(--prim-900);
+  --gallery-nav-bg: hsla(210, 40%, 98%, 0.6);
+  /* Lightbox */
+  --lightbox-background: rgba(234, 236, 238, 0.8);
+  --icone-lightbox-background-locked: (18, 26, 34, 0.1);
+  --icone-lightbox-color: var(--netral-00);
+  --icone-lightbox-border: var(--netral-200);
+  --icone-lightbox-background: rgba(18, 26, 34, 0.7);
+}
+
+/* Dark Theme Colors */
+html.dark {
+  --background-color: var(--netral-900);
+  --font-color-main: var(--netral-50);
+  --font-color-sec: var(--netral-00);
+  --font-color-gray: var(--netral-200);
+  --rules-color: var(--netral-00);
+  --link-color-underline: var(--netral-50);
+  --grain-filter: grayscale(1) brightness(0.45) opacity(0.5) contrast(3);
+
+  /* Nav */
+  --bg-nav: hsla(208, 29%, 10%, 0.4);
+  --color-switch: var(--prim-100);
+
+  /* Home page */
+  --text-shadow: var(--netral-900);
+  --bg-memory-home: var(--prim-900);
+  --bg-footer: var(--sec-900);
+
+  /*Galerie */
+  --current-project: var(--prim-300);
+  --gallery-nav-bg: hsla(208, 29%, 10%, 0.7);
+  /* Lightbox */
+  --lightbox-background: rgba(18, 26, 34, 0.8);
+  --icone-lightbox-background-locked: (18, 26, 34, 0.1);
+  --icone-lightbox-color: var(--netral-00);
+  --icone-lightbox-border: var(--netral-400);
+  --icone-lightbox-background: rgba(18, 26, 34, 0.7);
+}
+
+/* Theme Visibility Controls */
+html.dark .light_mode_only {
+  display: none;
+}
+html.light .dark_mode_only {
+  display: none;
+}

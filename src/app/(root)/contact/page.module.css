@@ -1,0 +1,30 @@
+.container_contact {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-SS);
+  padding-top: var(--spacing-M);
+}
+
+.heroSection {
+  padding-top: var(--spacing-M);
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: var(--font-size-subTitle_03);
+}
+
+.hero_title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-Title_01);
+  font-weight: var(--font-display-regular);
+  padding-bottom: var(--spacing-SS);
+  @media only screen and (max-width: 45.25em) {
+    font-size: var(--font-size-Title_03);
+  }
+}

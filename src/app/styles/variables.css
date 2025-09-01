@@ -1,0 +1,79 @@
+/* Design Tokens - Variables CSS
+ * Contains all design tokens for the application
+ * Extracted from globals.css for better organization and performance
+ */
+
+:root {
+  /* Layout */
+  --padding-inLine: 3vw;
+  --padding-vertical: 3vh;
+  --window-height: 100vh;
+  --max-width-MS: 1100px;
+  --max-width-MM: 1200px;
+  --max-width-M: 1600px;
+  --max-width-ML: 1900px;
+  --max-width-L: 2100px;
+  --nav-height: 5rem;
+  --footerSize: 28.125rem;
+  --footerSizeMobile: 43.75rem;
+
+
+  /* Transitions */
+  --transi-time-S: 100ms;
+  --transi-time-M: 200ms;
+  --transi-time-L: 300ms;
+  --hover-scaling: 1.05;
+  --active-scaling: 1.02;
+
+  /* Spacing */
+  --spacing-XXS: 0.25rem;
+  --spacing-XS: 0.5rem;
+  --spacing-SS: 1rem;
+  --spacing-S: 1.5rem;
+  --spacing-SM: 2.25rem;
+  --spacing-M: 3rem;
+  --spacing-LM: 3.75rem;
+  --spacing-XM: 5rem;
+  --spacing-L: 7.5rem;
+  --spacing-XL: 12rem;
+
+  /* Brightness */
+  --nav-brightness-mobile: brightness(0.8)
+
+
+  /* Borders and Radii */
+  --borderRadiusBtn-very-soft: 0.313rem;
+  --borderRadiusBtn-soft: 1.25rem;
+  --borderRadiusBtn-mid: 2.5rem;
+  --borderRadiusBtn-round: 50%;
+  --btnSeclection-height-S: 2.25rem;
+  --btnSeclection-height-M: 3rem;
+  --btnSeclection-height: 4.375rem;
+  --btnSeclection-width: 15.625rem;
+  --border-radius: 12px;
+
+  /* Icones */
+  --icone-XS: 1.875rem;
+  --icone-S: 3.125rem;
+  --icone-M: 5rem;
+  --icone-SL: 3rem;
+
+  
+}
+
+html.dark {
+--nav-brightness-mobile: brightness(0.3)
+}
+
+
+.content-container{
+
+  max-width: var(--max-width-L);
+  padding-inline: var(--padding-inLine);
+  margin: 0 auto;
+
+  
+  @media only screen and (max-width: 125em) {
+    max-width: var(--max-width-M);
+  }
+}

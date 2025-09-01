@@ -1,42 +1,33 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Modular CSS Architecture
+ * Import modular CSS files to improve organization, maintainability and performance
+ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import './styles/variables.css';
+@import './styles/typography.css';
+@import './styles/colors.css';
+@import './styles/reset.css';
+@import './styles/utilities.css';
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+/* Media Queries Reference
+ * For consistency and reference - no actual CSS is applied here
+ * Defined in em units (16px = 1em)
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+<div className={`grain ${styles.grain_opacity}`} aria-hidden="true"></div>
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+Descktop:
+- 1344px (84em) - @media only screen and (max-width: 84em){} 
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+Tablet:
+- 1040px (65em) - @media only screen and (max-width: 65em){} 
+- 720px (45.25em) - @media only screen and (max-width: 45.25em){} 
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+Phones:
+- 660px (41.25em) - @media only screen and (max-width: 41.25em){}
+- 560px (35em) - @media only screen and (max-width: 35em){}
+- 432px (27em) - @media only screen and (max-width: 27em){} 
+*/
+
+
+
+
+
