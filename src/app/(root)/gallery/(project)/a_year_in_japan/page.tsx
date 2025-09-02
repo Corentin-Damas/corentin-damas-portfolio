@@ -43,45 +43,21 @@ export const metadata = {
   },
 };
 
-// Structured data for the gallery (JSON-LD)
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ImageGallery",
-  name: "A Year in Japan",
-  description:
-    "A photographic journey through Japan, capturing moments and memories from a year-long stay.",
-  creator: {
-    "@type": "Person",
-    name: "Corentin Damas",
-    url: "https://www.corentindamas.com/about",
-  },
-  datePublished: "2018-12-01",
-  contentLocation: {
-    "@type": "Place",
-    name: "Japan",
-  },
-  keywords:
-    "Japan, photography, travel, Tokyo, architecture, street photography",
-  genre: "Travel Photography",
-};
-
 export default function Page() {
   return (
-    <>
-      <div className={styles.page}>
-        <Hero_gallery
-          title="A Year in Japan"
-          c1="Travel"
-          c2="2017 - 2018"
-          c3="Japan"
-          storyContent={<YearInJapanTxt />}
-        />
-        <ProjectGallery projectDir="a_year_in_japan" />
+    <div className={styles.page}>
+      <Hero_gallery
+        title="A Year in Japan"
+        c1="Travel"
+        c2="2017 - 2018"
+        c3="Japan"
+        storyContent={<YearInJapanTxt />}
+      />
+      <ProjectGallery projectDir="a_year_in_japan" />
 
-        <div className={styles.story_mobile}>
-          <Project_Story txt={<YearInJapanTxt />} />
-        </div>
+      <div className={styles.story_mobile}>
+        <Project_Story txt={<YearInJapanTxt />} />
       </div>
-    </>
+    </div>
   );
 }

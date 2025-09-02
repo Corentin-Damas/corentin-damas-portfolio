@@ -49,10 +49,10 @@ export default function Lightbox({
   const infoVars: React.CSSProperties | undefined = hasPalette
     ? ({
         // valeurs de repli sobres pour éviter les flashs
-        ["--info-c1" as any]: palette[0] ?? "#11354d",
-        ["--info-c2" as any]: palette[1] ?? "#11354d",
-        ["--info-c3" as any]: palette[2] ?? "#11354d",
-        ["--info-c4" as any]: palette[3] ?? "#11354d",
+        ["--info-c1" as string]: palette[0] ?? "#11354d",
+        ["--info-c2" as string]: palette[1] ?? "#11354d",
+        ["--info-c3" as string]: palette[2] ?? "#11354d",
+        ["--info-c4" as string]: palette[3] ?? "#11354d",
       } as React.CSSProperties)
     : undefined;
 

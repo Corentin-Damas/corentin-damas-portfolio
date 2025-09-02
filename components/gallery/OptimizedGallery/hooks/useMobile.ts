@@ -10,6 +10,6 @@ export default function useIsMobile(breakpoint: number) {
     on();
     m.addEventListener("change", on);
     return () => m.removeEventListener("change", on);
-  }, []);
+  }, [breakpoint]);
   return isMobile;
 }

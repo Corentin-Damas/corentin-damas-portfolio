@@ -5,7 +5,6 @@ import useContainerWidth from "./hooks/useContainerWidth";
 import {
   buildJustifiedRows,
   type InputImage,
-  type BuiltRow,
 } from "./hooks/buildJustifiedRows";
 import Row from "./Row";
 
@@ -21,8 +20,8 @@ type Props = {
   onSelect?: (index: number) => void;
 };
 
-const TARGET_ROW_HEIGHT= 280
-const MIN_ROW_HEIGHT= 1
+const TARGET_ROW_HEIGHT = 280;
+const MIN_ROW_HEIGHT = 1;
 
 export default function DesktopGallery({
   images,
@@ -48,23 +47,23 @@ export default function DesktopGallery({
   }, [width, stickyWidth]);
 
   // Quantification (évite les repacks pour 1–2px)
-  const effectiveWidth =
-    stickyWidth > 0 ? Math.round(stickyWidth / 16) * 16 : 0;
+  // const effectiveWidth =
+  //   stickyWidth > 0 ? Math.round(stickyWidth / 16) * 16 : 0;
 
   // Construction des lignes, seulement quand on a une vraie mesure
-const rows = useMemo(
-  () =>
-    width
-      ? buildJustifiedRows(images, Math.round(width), {
-          targetRowHeight,
-          gap,
-          minRowHeight,
-          maxRowHeight,
-          justifyLastRowAlways: true,
-        })
-      : [],
-  [images, width, gap]
-);
+  const rows = useMemo(
+    () =>
+      width
+        ? buildJustifiedRows(images, Math.round(width), {
+            targetRowHeight,
+            gap,
+            minRowHeight,
+            maxRowHeight,
+            justifyLastRowAlways: true,
+          })
+        : [],
+    [images, width, gap, minRowHeight, maxRowHeight, targetRowHeight]
+  );
   return (
     <div
       ref={ref}

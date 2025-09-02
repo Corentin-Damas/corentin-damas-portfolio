@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../about/page.module.css";
 
-import Footer from "../../../../components/footer/Footer";
-
 function page() {
   return (
     <>

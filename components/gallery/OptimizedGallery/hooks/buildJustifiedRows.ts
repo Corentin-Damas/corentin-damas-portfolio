@@ -66,7 +66,7 @@ export function buildJustifiedRows(
     // Largeurs réelles à cette hauteur
     const exacts = current.map((it) => it.aspectRatio * H);
     const floors = exacts.map((x) => Math.floor(x));
-    let used = floors.reduce((a, b) => a + b, 0);
+    const used = floors.reduce((a, b) => a + b, 0);
     let missing = target - used;
 
     // Distribuer les pixels manquants sur les plus gros résidus

@@ -8,7 +8,7 @@ export default function useContainerWidth<T extends El>() {
   const nodeRef = useRef<T | null>(null);
   const [width, setWidth] = useState(0);
 
-  const measure = (node: T | null) => {
+  const measure = useCallback((node: T | null) => {
     if (!node) return 0;
     const cs = getComputedStyle(node);
     const paddingX =
@@ -16,13 +16,16 @@ export default function useContainerWidth<T extends El>() {
     // clientWidth = content + padding → on retire le padding pour obtenir l’espace réel dispo
     const w = node.clientWidth - paddingX;
     return Math.max(0, Math.round(w));
-  };
-
-  const ref = useCallback((node: T | null) => {
-    if (nodeRef.current === node) return;
-    nodeRef.current = node;
-    if (node) setWidth(measure(node));
   }, []);
+
+  const ref = useCallback(
+    (node: T | null) => {
+      if (nodeRef.current === node) return;
+      nodeRef.current = node;
+      if (node) setWidth(measure(node));
+    },
+    [measure]
+  );
 
   useEffect(() => {
     const node = nodeRef.current;
@@ -46,7 +49,7 @@ export default function useContainerWidth<T extends El>() {
       obs.disconnect();
       window.removeEventListener("resize", onWin);
     };
-  }, []);
+  }, [measure]);
 
   return { ref, width };
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./page.module.css";
-import Footer from "../../../../components/footer/Footer";
 import Section_Contact from "../../../../components/landingPage/Section_Contact";
 
 function page() {

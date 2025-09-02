@@ -28,6 +28,7 @@ type ImageForGallery = {
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function pickMeta(base: string, metadata: Record<string, any>) {
   const key = [`${base}.webp`, `${base}.jpg`, `${base}.jpeg`].find(k => metadata[k]);
   const m = key ? metadata[key] : undefined;
