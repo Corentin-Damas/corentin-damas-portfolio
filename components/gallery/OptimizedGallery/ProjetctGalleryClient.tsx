@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import DesktopGallery from "./DesktopGallery";
 import useIsMobile from "./hooks/useMobile";
-import Lightbox from "../OptimizedGallery/lightbox/Lightbox";
+import Lightbox from "../OptimizedGallery/lightbox";
 import MobileGallery from "./MobileGallery";
-import WaitingGallery from "./WaitingGallery"
+import WaitingGallery from "./WaitingGallery";
 
 export type GalleryImage = {
   src: string;
@@ -39,13 +39,13 @@ export default function ProjectGalleryClient({
       if (alive) setLoading(false);
     });
 
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+    };
   }, [images]);
 
   if (loading) {
-    return (
-    <WaitingGallery/>
-    );
+    return <WaitingGallery />;
   }
 
   return (

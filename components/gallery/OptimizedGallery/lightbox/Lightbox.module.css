@@ -45,7 +45,7 @@
   border-radius: 0;
   overflow: hidden;
   z-index: 1001;
-  touch-action: pan-y;
+  touch-action: none; /* nécessaire pour pinch-to-zoom et drag custom */
   @media only screen and (max-width: 65em) {
     height: 100%;
     width: 100%;
@@ -77,6 +77,7 @@
   backdrop-filter: blur(12px);
   z-index: 1003;
   border: 1px solid var(--icone-lightbox-border);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 .nav,
 .close {
@@ -89,12 +90,49 @@
   @media only screen and (max-width: 65em) {
     transform: translateY(0);
     bottom: 2vmin;
+    /* Boutons plus grands sur mobile */
+    width: calc(var(--icone-S) + 12px);
+    height: calc(var(--icone-S) + 12px);
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+/* Disposition mobile pour éviter les chevauchements */
+@media only screen and (max-width: 65em) {
+  .prev {
+    left: 2vmin;
+    bottom: 2vmin;
+  }
+
+  .next {
+    right: 2vmin;
+    bottom: 2vmin;
   }
 }
 
 .nav:disabled {
   opacity: 0.35;
   cursor: default;
+}
+
+/* Effets de hover/touch pour les boutons */
+.nav:hover:not(:disabled),
+.close:hover,
+.infoToggle:hover {
+  transform: scale(1.05);
+  @media only screen and (max-width: 65em) {
+    transform: scale(1.1);
+  }
+}
+
+.nav:active:not(:disabled),
+.close:active,
+.infoToggle:active {
+  transform: scale(0.95);
+  @media only screen and (max-width: 65em) {
+    transform: scale(0.9);
+  }
 }
 
 .prev {
@@ -108,6 +146,17 @@
   top: 2vmin;
   right: 2vmin;
   transform: none;
+  @media only screen and (max-width: 65em) {
+    /* Bouton fermer en haut à gauche sur mobile */
+    top: 2vmin;
+    left: 2vmin;
+    right: auto;
+    /* Bouton fermer plus grand sur mobile */
+    width: calc(var(--icone-S) + 8px);
+    height: calc(var(--icone-S) + 8px);
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 
 .infoToggle {
@@ -118,8 +167,16 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   @media only screen and (max-width: 65em) {
-    right: calc(50% - var(--icone-S) / 2);
-    bottom: 2vmin;
+    /* Position en haut à droite sur mobile */
+    top: 2vmin;
+    right: 2vmin;
+    bottom: auto;
+    /* Bouton info plus grand sur mobile */
+    width: calc(var(--icone-S) + 8px);
+    height: calc(var(--icone-S) + 8px);
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.3rem;
   }
 }
 
@@ -359,48 +416,43 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* garde ton choix si différent */
+  object-fit: contain;
   opacity: 0;
   transform: translateZ(0);
   will-change: transform, opacity;
+  transition: opacity 0.3s ease;
 }
 
-/* Etat: loading / loaded */
+/* Fond de transition supprimé */
+
+/* Canvas de zoom (on applique les transforms ici) */
+.zoomCanvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+/* Etat: loaded */
 .frame[data-state="loaded"] .media {
   opacity: 1;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.3s ease;
 }
 
-/* Petit loader (spinner) centré */
-.loader {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.35);
-  border-top-color: currentColor;
-  animation: lb-spin 0.8s linear infinite;
-  opacity: 1;
-}
-@keyframes lb-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Loader supprimé */
 
-/* Anim d’entrée selon la direction (suivante / précédente) */
+/* Anim d'entrée selon la direction (suivante / précédente) */
 .frame[data-dir="next"] .media {
-  animation: lb-in-right 0.28s ease both;
+  animation: lb-in-right 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .frame[data-dir="prev"] .media {
-  animation: lb-in-left 0.28s ease both;
+  animation: lb-in-left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @keyframes lb-in-right {
   from {
-    transform: translateX(12%);
+    transform: translateX(8%);
     opacity: 0.001;
   }
   to {
@@ -410,7 +462,7 @@
 }
 @keyframes lb-in-left {
   from {
-    transform: translateX(-12%);
+    transform: translateX(-8%);
     opacity: 0.001;
   }
   to {
