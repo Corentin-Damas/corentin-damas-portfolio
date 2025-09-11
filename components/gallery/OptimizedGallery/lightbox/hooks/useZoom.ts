@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 
 export interface ZoomState {
   scale: number;
@@ -33,17 +33,21 @@ const DEFAULT_ZOOM_LIMITS: ZoomLimits = {
 };
 
 export const useZoom = (
-  containerRef: React.RefObject<HTMLElement | null>,
-  imageRef: React.RefObject<HTMLElement | null>,
+  containerRef: React.RefObject<HTMLDivElement | null>,
+  imageRef: React.RefObject<HTMLDivElement | null>,
   limits: Partial<ZoomLimits> = {}
 ) => {
   const [zoomState, setZoomState] = useState<ZoomState>(DEFAULT_ZOOM_STATE);
   const [isZooming, setIsZooming] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
-  const zoomLimits = { ...DEFAULT_ZOOM_LIMITS, ...limits };
+  const zoomLimits = useMemo(
+    () => ({ ...DEFAULT_ZOOM_LIMITS, ...limits }),
+    [limits]
+  );
   const lastTouchDistance = useRef<number>(0);
   const dragStart = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const isMouseDown = useRef<boolean>(false);
 
   // Contraindre une valeur dans des bornes
   const clamp = useCallback((value: number, min: number, max: number) => {
@@ -206,13 +210,66 @@ export const useZoom = (
     el.addEventListener("touchmove", handleTouchMove, { passive: false });
     el.addEventListener("touchend", handleTouchEnd);
     el.addEventListener("touchcancel", handleTouchEnd);
+
+    // Desktop: mouse drag when zoomed
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!zoomState.isZoomed) return;
+      isMouseDown.current = true;
+      setIsDragging(true);
+      dragStart.current = {
+        x: e.clientX - zoomState.translateX,
+        y: e.clientY - zoomState.translateY,
+      };
+      e.preventDefault();
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isMouseDown.current || !zoomState.isZoomed) return;
+      updateZoomState({
+        translateX: e.clientX - dragStart.current.x,
+        translateY: e.clientY - dragStart.current.y,
+      });
+      e.preventDefault();
+    };
+
+    const handleMouseUp = () => {
+      isMouseDown.current = false;
+      setIsDragging(false);
+    };
+
+    // Desktop: wheel to zoom
+    const handleWheel = (e: WheelEvent) => {
+      const delta = -e.deltaY;
+      if (delta === 0) return;
+      const factor = delta > 0 ? 1.1 : 0.9;
+      const newScale = zoomState.scale * factor;
+      updateZoomState({ scale: newScale });
+      e.preventDefault();
+    };
+
+    el.addEventListener("mousedown", handleMouseDown, { passive: false });
+    el.addEventListener("mousemove", handleMouseMove, { passive: false });
+    window.addEventListener("mouseup", handleMouseUp);
+    el.addEventListener("wheel", handleWheel, { passive: false });
     return () => {
       el.removeEventListener("touchstart", handleTouchStart);
       el.removeEventListener("touchmove", handleTouchMove);
       el.removeEventListener("touchend", handleTouchEnd);
       el.removeEventListener("touchcancel", handleTouchEnd);
+      el.removeEventListener("mousedown", handleMouseDown);
+      el.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      el.removeEventListener("wheel", handleWheel);
     };
-  }, [containerRef, handleTouchStart, handleTouchMove, handleTouchEnd]);
+  }, [
+    containerRef,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    updateZoomState,
+    zoomState.isZoomed,
+    zoomState.scale,
+  ]);
 
   // Style à appliquer à la zone zoomable
   const transformStyle = useCallback(() => {

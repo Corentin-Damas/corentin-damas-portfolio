@@ -1,63 +1,82 @@
-/* === Overlay & Backdrop === sideTitle  */
-.overlay {
+/* === Lightbox Principal === */
+.lightbox {
   position: fixed;
   inset: 0;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* === Backdrop === */
 .backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: var(--lightbox-background);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  z-index: 1001;
-}
-
-/* === Content & Stage === */
-.content_container {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 0;
-  padding: 0;
-  pointer-events: none; /* on réactive sur enfants */
-  z-index: 1001;
-  @media only screen and (max-width: 65em) {
-    flex-direction: column;
-  }
-}
-
-.content {
-  position: relative;
-  flex: 1;
-  min-width: 0;
   pointer-events: auto;
 }
 
-.stage {
+/* === Contenu Principal === */
+.content {
   position: relative;
   width: 100%;
-  height: 100vh;
-  background: transparent;
-  border-radius: 0;
-  overflow: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1001;
-  touch-action: none; /* nécessaire pour pinch-to-zoom et drag custom */
-  @media only screen and (max-width: 65em) {
-    height: 100%;
-    width: 100%;
-  }
+  pointer-events: none;
 }
 
+/* === Section Image === */
+.imageSection {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* === Image Container === */
+.imageContainer {
+  position: relative;
+  /* Calcule une boîte au ratio de l'image, mais bornée à l'écran */
+  --img-w: 1600;
+  --img-h: 900;
+  width: min(90vw, calc(90vh * (var(--img-w) / var(--img-h))));
+  height: min(90vh, calc(90vw * (var(--img-h) / var(--img-w))));
+  max-width: calc(100vw - 4rem);
+  max-height: calc(100vh - 4rem);
+  pointer-events: auto;
+}
+
+/* === Image Next.js === */
 .img {
-  padding: 2vmin 2vw 6vmin 2vw; /* espace haut/bas & gauche/droite */
-  object-fit: contain;
-  z-index: 1001;
+  object-fit: contain !important;
   user-select: none;
   -webkit-user-drag: none;
+  pointer-events: auto;
+}
+
+/* === Frame & Zoom === */
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  pointer-events: auto;
+}
+
+.zoomCanvas {
+  position: relative;
+  width: auto;
+  height: auto;
+  will-change: transform;
+  transform-origin: center center;
 }
 
 /* === Navigation Controls === */
@@ -65,7 +84,7 @@
 .close,
 .infoToggle,
 .sideClose {
-  position: absolute;
+  position: fixed;
   color: var(--icone-lightbox-color);
   pointer-events: auto;
   cursor: pointer;
@@ -75,12 +94,9 @@
   display: grid;
   place-items: center;
   backdrop-filter: blur(12px);
-  z-index: 1003;
+  z-index: 1002;
   border: 1px solid var(--icone-lightbox-border);
   transition: transform 0.2s ease, opacity 0.2s ease;
-}
-.nav,
-.close {
   background: var(--icone-lightbox-background);
 }
 
@@ -120,18 +136,110 @@
 .nav:hover:not(:disabled),
 .close:hover,
 .infoToggle:hover {
-  transform: scale(1.05);
-  @media only screen and (max-width: 65em) {
-    transform: scale(1.1);
-  }
+  backdrop-filter: blur(12px) brightness(0.1);
 }
 
 .nav:active:not(:disabled),
 .close:active,
 .infoToggle:active {
-  transform: scale(0.95);
-  @media only screen and (max-width: 65em) {
-    transform: scale(0.9);
+  backdrop-filter: blur(12px) brightness(0.1);
+}
+
+/* Effet de bordure tournante pour les boutons - seulement au clic */
+.nav:not(:disabled)::before,
+.close::before,
+.infoToggle::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 999px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--icone-lightbox-border) 45deg,
+    transparent 90deg,
+    transparent 270deg,
+    var(--icone-lightbox-border) 315deg,
+    transparent 360deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Effet de hover simple (sans bordure tournante) */
+.nav:not(:disabled):hover,
+.close:hover,
+.infoToggle:hover {
+  backdrop-filter: blur(12px) brightness(0.1);
+}
+
+/* Bordure tournante seulement au clic/appui */
+.nav:not(:disabled):active::before,
+.close:active::before,
+.infoToggle:active::before {
+  opacity: 1;
+  animation: rotateBorder 0.8s linear infinite;
+}
+
+@keyframes rotateBorder {
+  0% {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      var(--icone-lightbox-border) 45deg,
+      transparent 90deg,
+      transparent 270deg,
+      var(--icone-lightbox-border) 315deg,
+      transparent 360deg
+    );
+  }
+  25% {
+    background: conic-gradient(
+      from 90deg,
+      transparent 0deg,
+      var(--icone-lightbox-border) 45deg,
+      transparent 90deg,
+      transparent 270deg,
+      var(--icone-lightbox-border) 315deg,
+      transparent 360deg
+    );
+  }
+  50% {
+    background: conic-gradient(
+      from 180deg,
+      transparent 0deg,
+      var(--icone-lightbox-border) 45deg,
+      transparent 90deg,
+      transparent 270deg,
+      var(--icone-lightbox-border) 315deg,
+      transparent 360deg
+    );
+  }
+  75% {
+    background: conic-gradient(
+      from 270deg,
+      transparent 0deg,
+      var(--icone-lightbox-border) 45deg,
+      transparent 90deg,
+      transparent 270deg,
+      var(--icone-lightbox-border) 315deg,
+      transparent 360deg
+    );
+  }
+  100% {
+    background: conic-gradient(
+      from 360deg,
+      transparent 0deg,
+      var(--icone-lightbox-border) 45deg,
+      transparent 90deg,
+      transparent 270deg,
+      var(--icone-lightbox-border) 315deg,
+      transparent 360deg
+    );
   }
 }
 
@@ -182,7 +290,7 @@
 
 /* === Counter === */
 .counter {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 1.5vmin;
@@ -192,21 +300,23 @@
   letter-spacing: 0.02em;
   pointer-events: none;
   opacity: 0.9;
-  z-index: 1003;
+  z-index: 1002;
   @media only screen and (max-width: 65em) {
     top: 2vmin;
   }
 }
 
 /* ======== Side Panel (pousse) ========= */
-/* width contrôlée via variable, 0 par défaut -> ne prend PAS de place quand fermé */
 .side {
   --side-w: 0px;
   --side-h: 0px;
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
   width: var(--side-w);
-  overflow: hidden; /* masque le contenu quand fermé */
-  transform: translateX(100%); /* glisse hors écran quand fermé */
+  overflow: hidden;
+  transform: translateX(100%);
   transition: width 0.18s ease-out, transform 0.18s ease-out;
   background: rgba(10, 12, 16, 0.55);
   -webkit-backdrop-filter: blur(18px) brightness(0.8);
@@ -406,47 +516,17 @@
 /* Wrapper d'animation + état de chargement */
 .frame {
   position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
 }
 
-/* Cible l'élément média (image) */
-.media {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0;
-  transform: translateZ(0);
-  will-change: transform, opacity;
-  transition: opacity 0.3s ease;
-}
-
-/* Fond de transition supprimé */
-
-/* Canvas de zoom (on applique les transforms ici) */
-.zoomCanvas {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  will-change: transform;
-  transform-origin: center center;
-}
-
-/* Etat: loaded */
-.frame[data-state="loaded"] .media {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-/* Loader supprimé */
-
-/* Anim d'entrée selon la direction (suivante / précédente) */
-.frame[data-dir="next"] .media {
+/* Animations d'entrée selon la direction */
+.frame[data-dir="next"] .img {
   animation: lb-in-right 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-.frame[data-dir="prev"] .media {
+.frame[data-dir="prev"] .img {
   animation: lb-in-left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -473,8 +553,8 @@
 
 /* Respecte l'accessibilité */
 @media (prefers-reduced-motion: reduce) {
-  .frame[data-dir="next"] .media,
-  .frame[data-dir="prev"] .media {
+  .frame[data-dir="next"] .img,
+  .frame[data-dir="prev"] .img {
     animation: none;
   }
 }

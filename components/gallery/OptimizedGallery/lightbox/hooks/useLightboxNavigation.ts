@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import type { NavigationState } from "../types";
+import type { NavigationState, LightboxImage } from "../types";
 
 export const useLightboxNavigation = (
-  images: any[],
+  images: LightboxImage[],
   index: number
 ): NavigationState => {
   return useMemo(() => {

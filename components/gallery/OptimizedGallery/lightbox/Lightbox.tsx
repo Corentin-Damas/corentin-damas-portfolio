@@ -47,8 +47,8 @@ export default function Lightbox({
   useImagePreloading(images, index, navigation.prevIdx, navigation.nextIdx);
 
   // Zoom (mobile)
-  const containerRef = useRef<HTMLElement | null>(null);
-  const zoomRef = useRef<HTMLElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const zoomRef = useRef<HTMLDivElement | null>(null);
   const { zoomState, transformStyle, resetZoom, stepZoom } = useZoom(
     containerRef,
     zoomRef,
@@ -83,11 +83,34 @@ export default function Lightbox({
   );
 
   // Callbacks
-  const handleStageClick = useCallback(
+  const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
-      swipeGestures.onStageClick(e, infoOpen, onClose, setInfoOpen);
+      // Backdrop click → fermer uniquement
+      e.preventDefault();
+      e.stopPropagation();
+      onClose();
     },
-    [swipeGestures, infoOpen, onClose, setInfoOpen]
+    [onClose]
+  );
+
+  const handleImageSectionClick = useCallback((e: React.MouseEvent) => {
+    // Empêcher la propagation vers le backdrop
+    e.stopPropagation();
+  }, []);
+
+  const handleStageClick = useCallback((e: React.MouseEvent) => {
+    // Tap sur l'image → ne fait rien (prépare double‑tap prochainement)
+    e.stopPropagation();
+    return;
+  }, []);
+
+  // Double click (desktop) traité comme double-tap → stepZoom
+  const handleStageDoubleClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      stepZoom();
+    },
+    [stepZoom]
   );
 
   const handleToggleInfo = useCallback(() => {
@@ -107,36 +130,25 @@ export default function Lightbox({
 
   return (
     <div
-      className={styles.overlay}
+      className={styles.lightbox}
       role="dialog"
       aria-modal="true"
       aria-labelledby="lb-title"
     >
-      <div className={styles.backdrop} onClick={handleStageClick} />
+      {/* Backdrop cliquable */}
+      <div className={styles.backdrop} onClick={handleBackdropClick} />
 
-      <div className={styles.content_container}>
-        {/* Zone image (flex:1) */}
-        <div className={styles.content}>
-          <LightboxControls
-            prevIdx={navigation.prevIdx}
-            nextIdx={navigation.nextIdx}
-            onNavigate={onNavigate}
-            onClose={onClose}
-            infoOpen={infoOpen}
-            onToggleInfo={handleToggleInfo}
-            hasPalette={hasPalette}
-            infoVars={infoVars}
-            index={index}
-            total={navigation.total}
-            onStepZoom={stepZoom}
-          />
-
+      {/* Contenu principal */}
+      <div className={styles.content}>
+        {/* Zone image centrée */}
+        <div className={styles.imageSection} onClick={handleImageSectionClick}>
           <LightboxImage
             image={current}
             loaded={loaded}
             dir={dir}
-            onLoadingComplete={() => setLoaded(true)}
-            onStageClick={handleStageClick}
+            onLoad={() => setLoaded(true)}
+            onImageClick={handleStageClick}
+            onImageDoubleClick={handleStageDoubleClick}
             onPointerDown={swipeGestures.onPointerDown}
             onPointerMove={swipeGestures.onPointerMove}
             onPointerUp={swipeGestures.onPointerUp}
@@ -147,6 +159,22 @@ export default function Lightbox({
           />
         </div>
 
+        {/* Contrôles de navigation */}
+        <LightboxControls
+          prevIdx={navigation.prevIdx}
+          nextIdx={navigation.nextIdx}
+          onNavigate={onNavigate}
+          onClose={onClose}
+          infoOpen={infoOpen}
+          onToggleInfo={handleToggleInfo}
+          hasPalette={hasPalette}
+          infoVars={infoVars}
+          index={index}
+          total={navigation.total}
+          onStepZoom={stepZoom}
+        />
+
+        {/* Panneau d'informations */}
         <LightboxInfoPanel
           image={current}
           infoOpen={infoOpen}

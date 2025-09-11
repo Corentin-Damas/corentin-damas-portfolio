@@ -9,13 +9,14 @@ interface LightboxImageProps {
   image: LightboxImageType;
   loaded: boolean;
   dir: "next" | "prev" | null;
-  onLoadingComplete: () => void;
-  onStageClick: (e: React.MouseEvent) => void;
+  onLoad: () => void;
+  onImageClick: (e: React.MouseEvent) => void;
+  onImageDoubleClick?: (e: React.MouseEvent) => void;
   onPointerDown: (e: React.PointerEvent) => void;
   onPointerMove: (e: React.PointerEvent) => void;
   onPointerUp: (e: React.PointerEvent) => void;
-  containerRef: React.RefObject<HTMLElement | null>;
-  zoomRef: React.RefObject<HTMLElement | null>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  zoomRef: React.RefObject<HTMLDivElement | null>;
   transformStyle?: React.CSSProperties;
   disableSwipe?: boolean;
 }
@@ -25,8 +26,9 @@ const LightboxImage = React.memo<LightboxImageProps>(
     image,
     loaded,
     dir,
-    onLoadingComplete,
-    onStageClick,
+    onLoad,
+    onImageClick,
+    onImageDoubleClick,
     onPointerDown,
     onPointerMove,
     onPointerUp,
@@ -41,31 +43,34 @@ const LightboxImage = React.memo<LightboxImageProps>(
         className={styles.frame}
         data-dir={dir ?? ""}
         data-state={loaded ? "loaded" : "loading"}
-        onClick={onStageClick}
-        onPointerDown={disableSwipe ? undefined : onPointerDown}
-        onPointerMove={disableSwipe ? undefined : onPointerMove}
-        onPointerUp={disableSwipe ? undefined : onPointerUp}
-        onPointerCancel={disableSwipe ? undefined : onPointerUp}
+        ref={containerRef}
       >
-        <div className={styles.stage} ref={containerRef}>
+        <div className={styles.zoomCanvas} ref={zoomRef} style={transformStyle}>
           <div
-            className={styles.zoomCanvas}
-            ref={zoomRef}
-            style={transformStyle}
+            className={styles.imageContainer}
+            style={{
+              ["--img-w" as unknown as string]: String(image.width),
+              ["--img-h" as unknown as string]: String(image.height),
+            }}
+            onPointerDown={disableSwipe ? undefined : onPointerDown}
+            onPointerMove={disableSwipe ? undefined : onPointerMove}
+            onPointerUp={disableSwipe ? undefined : onPointerUp}
+            onPointerCancel={disableSwipe ? undefined : onPointerUp}
           >
             <Image
               src={image.src}
               alt={image.alt}
               unoptimized
-              sizes="(max-width: 768px) 100vw, 100vw"
-              className={`${styles.img} ${styles.media}`}
               fill
-              onLoadingComplete={onLoadingComplete}
+              sizes="90vw"
+              className={styles.img}
+              onLoad={onLoad}
+              onClick={onImageClick}
+              onDoubleClick={onImageDoubleClick}
               priority
             />
           </div>
         </div>
-        {/* Loader supprimé */}
       </div>
     );
   }

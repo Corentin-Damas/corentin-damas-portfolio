@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import type { LightboxState } from "../types";
 
 export const useLightboxState = (index: number) => {
   const [infoOpen, setInfoOpen] = useState(false);
@@ -7,7 +6,6 @@ export const useLightboxState = (index: number) => {
   const [loaded, setLoaded] = useState(false);
   const [dir, setDir] = useState<"next" | "prev" | null>(null);
   const prevIndexRef = useRef(index);
-  const isFirstMountRef = useRef(true);
 
   // Gestion de la direction d'animation et reset des états au changement d'image
   useEffect(() => {
@@ -19,10 +17,8 @@ export const useLightboxState = (index: number) => {
     }
     prevIndexRef.current = index;
     setLoaded(false);
-    // Rien à faire pour un spinner: supprimé
-  }, [index]);
 
-  // Plus de gestion de spinner
+  }, [index]);
 
   // Lock scroll
   useEffect(() => {

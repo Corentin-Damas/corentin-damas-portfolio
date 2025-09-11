@@ -5,7 +5,7 @@ export const useKeyboardNavigation = (
   onNavigate: (index: number) => void,
   prevIdx: number | null,
   nextIdx: number | null,
-  setInfoOpen: (open: boolean) => void
+  setInfoOpen: (open: boolean | ((prev: boolean) => boolean)) => void
 ) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

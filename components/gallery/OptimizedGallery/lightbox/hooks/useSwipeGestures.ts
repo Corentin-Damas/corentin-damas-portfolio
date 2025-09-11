@@ -5,7 +5,6 @@ import type { SwipeState } from "../types";
 const SWIPE_THRESHOLD = 60; // px - distance minimale pour déclencher un swipe
 const VELOCITY_THRESHOLD = 0.3; // px/ms - vitesse minimale pour un swipe rapide
 const DIRECTION_THRESHOLD = 0.5; // ratio - dominance horizontale vs verticale
-const MOMENTUM_DECAY = 0.95; // facteur de décélération pour le momentum
 
 export const useSwipeGestures = (
   onNavigate: (index: number) => void,
@@ -114,28 +113,16 @@ export const useSwipeGestures = (
     [onNavigate, prevIdx, nextIdx]
   );
 
-  const onStageClick = useCallback(
-    (
-      e: React.MouseEvent,
-      infoOpen: boolean,
-      onClose: () => void,
-      setInfoOpen: (open: boolean) => void
-    ) => {
-      if (swipe.current.blockClick) {
-        // évite de fermer après un swipe
-        swipe.current.blockClick = false;
-        e.stopPropagation();
-        return;
-      }
-      // règle "tap": ferme le panneau sinon la lightbox
-      if (infoOpen) {
-        setInfoOpen(false);
-      } else {
-        onClose();
-      }
-    },
-    []
-  );
+  const onStageClick = useCallback((e: React.MouseEvent) => {
+    if (swipe.current.blockClick) {
+      // évite l'action après un swipe
+      swipe.current.blockClick = false;
+      e.stopPropagation();
+      return;
+    }
+    // Le stage click ne gère plus la fermeture
+    // Cette fonction est maintenant dédiée uniquement aux gestes de swipe
+  }, []);
 
   return {
     onPointerDown,
