@@ -58,7 +58,9 @@ export default function Page() {
       {/* Improved optimized gallery with sharp corners */}
       <ProjectGallery projectDir="museums" />
       <div className={styles.story_mobile}>
-        <Project_Story txt={<MuseumsTxt />} />
+        <Project_Story>
+          <MuseumsTxt />
+        </Project_Story>
       </div>
     </div>
   );

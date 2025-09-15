@@ -58,7 +58,9 @@ export default function Page() {
       {/* Improved optimized gallery with sharp corners */}
       <ProjectGallery projectDir="tsuzukitai" />
       <div className={styles.story_mobile}>
-        <Project_Story txt={<TsuzukitaiTxt />} />
+        <Project_Story>
+          <TsuzukitaiTxt />
+        </Project_Story>
       </div>
     </div>
   );

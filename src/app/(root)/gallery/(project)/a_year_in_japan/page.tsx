@@ -56,7 +56,9 @@ export default function Page() {
       <ProjectGallery projectDir="a_year_in_japan" />
 
       <div className={styles.story_mobile}>
-        <Project_Story txt={<YearInJapanTxt />} />
+        <Project_Story>
+          <YearInJapanTxt />
+        </Project_Story>
       </div>
     </div>
   );

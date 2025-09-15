@@ -5,24 +5,19 @@ function YearInJapanTxt() {
   return (
     <div className={`${styles.popUpInformation}`}>
       <p>
-        01 - In 2016 after my studies at the university I wanted dreadfully to
-        study Japanese, a dream I had from my childhood where I could ear the
-        Japaneses language. Through Tv, Anime, games Song. I recall that during
-        late. Middle-school and high-school every day before going to school I
-        was speeding to eat my breakfast to be able to watch the TV at least
-        20min. During this time there was a little TV channel that was diffusing
-        random Japanese songs every morning and i really like the sound of it.
+        01 - After university in 2016, I finally went after a quiet dream: to
+        study Japanese. As a kid, I loved the sound of the language. Before
+        school, I would rush breakfast to catch a small TV channel that played
+        random Japanese songs. I did not understand the words, but the rhythm
+        stayed with me.
       </p>
 
       <p>
-        02 - Even before that i watched on my father computer different animes
-        That just came out like One-piece, Bleach, Naruto and so on in the
-        original soundtrack subtitle in french or english; with my cousin we
-        always had some game of Pokemon and Zelda together. But my very first
-        animation movie that make me fall in love for the Japanese animation
-        style was Princess Mononoke. I guess it was this gradual accumulation of
-        this little thing that gets me to travel to live in Japan from October
-        2016 and January 2018.
+        02 - Earlier, on my father&#39;s computer, I watched new anime — One
+        Piece, Bleach, Naruto. With my cousin, we played Pokémon and Zelda. The
+        first film that truly moved me was Princess Mononoke. Many small moments
+        like these piled up, and in the end they pushed me to go. I lived in
+        Japan from October 2016 to January 2018.
       </p>
     </div>
   );

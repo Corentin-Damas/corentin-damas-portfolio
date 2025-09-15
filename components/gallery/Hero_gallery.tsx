@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from '../gallery/Hero_gallery.module.css';
-import Project_Story from './Project_Story';
+import React from "react";
+import styles from "../gallery/Hero_gallery.module.css";
+import Project_Story from "./Project_Story";
 
 function Hero_gallery({
   title,
@@ -29,10 +29,8 @@ function Hero_gallery({
           </div>
         </div>
         <div className={styles.DesktopText}>
-
-          {storyContent && <Project_Story txt={storyContent} />}
+          {storyContent && <Project_Story>{storyContent}</Project_Story>}
         </div>
-
       </div>
     </div>
   );

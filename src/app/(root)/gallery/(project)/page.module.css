@@ -50,7 +50,7 @@
 .project__title {
   position: relative;
   padding: var(--spacing-XS);
-  
+
   color: var(--font-color-main);
 
   font-family: var(--font-legend);
@@ -95,4 +95,10 @@
   @media only screen and (min-width: 45.25em) {
     display: none;
   }
+}
+
+.intro_text {
+  margin-top: var(--spacing-L);
+  padding-top: var(--spacing-M);
+  border-top: 1px solid var(--rules-color);
 }

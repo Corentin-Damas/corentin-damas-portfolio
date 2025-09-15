@@ -3,18 +3,18 @@ import styles from "./text.module.css";
 
 function BlackAndWhiteTxt() {
   return (
-    <div className={`${styles.popUpInformation} ${styles.open}`}>
-      <h5 className={styles.popUpInformation_txt}>
-        01 - Work in black and white.
-      </h5>
-      <p className={styles.popUpInformation_txt}>
-        02 - <br />
-        From Film (and my darkroom)
-        <br />
-        From travelling. <br />
-        From Infrared. <br />
-        From walking. <br />
-        From Pinhole Camera. <br />
+    <div className={`${styles.popUpInformation}`}>
+      <p>
+        01 - Work in black and white. From film and the darkroom, from travel
+        and long walks. From infrared experiments and pinhole cameras. Simple
+        tools, patient light. These photographs strip away color to focus on
+        form and shadow.
+      </p>
+      <p>
+        02 - The work focuses on contrast, the dance between pure whites and
+        deep blacks. Shapes emerge through light and shadow. In the darkroom,
+        you feel the paper between your fingers, watch the image appear in the
+        developer. It is a tactile process, hands-on from start to finish.
       </p>
     </div>
   );

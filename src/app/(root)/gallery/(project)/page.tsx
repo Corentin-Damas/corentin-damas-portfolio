@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import styles from "./page.module.css";
 import Hero_gallery from "../../../../../components/gallery/Hero_gallery";
+import Project_Story from "../../../../../components/gallery/Project_Story";
+import IndexIntroTxt from "../../../../../components/gallery/project_text/IndexIntroTxt";
 
 function Page() {
   const galleryProjects = [
@@ -86,16 +88,15 @@ function Page() {
             className={`${styles.project__container}`}
           >
             <div className={styles.image__container}>
-
-            <Image
-              src={el.source}
-              alt={el.altTxt}
-              width={600}
-              height={0}
-              quality={80}
-              // fill
-              sizes="(max-width: 640px) 100vw, 33vw"
-              className={`${el?.altClass} ${styles.project__img}`}
+              <Image
+                src={el.source}
+                alt={el.altTxt}
+                width={600}
+                height={0}
+                quality={80}
+                // fill
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className={`${el?.altClass} ${styles.project__img}`}
               />
             </div>
             <h5 className={styles.project__title}>
@@ -103,6 +104,12 @@ function Page() {
             </h5>
           </Link>
         ))}
+      </div>
+
+      <div className={styles.intro_text}>
+        <Project_Story>
+          <IndexIntroTxt />
+        </Project_Story>
       </div>
     </section>
   );

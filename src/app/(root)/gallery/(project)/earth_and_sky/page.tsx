@@ -56,7 +56,9 @@ export default function Page() {
       />
       <ProjectGallery projectDir="earth_and_sky" />
       <div className={styles.story_mobile}>
-        <Project_Story txt={<EarthAndSkyTxt />} />
+        <Project_Story>
+          <EarthAndSkyTxt />
+        </Project_Story>
       </div>
     </div>
   );

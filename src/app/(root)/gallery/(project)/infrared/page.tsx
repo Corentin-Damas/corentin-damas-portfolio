@@ -61,7 +61,9 @@ export default function Page() {
       {/* Improved optimized gallery with sharp corners */}
       <ProjectGallery projectDir="infrared" />
       <div className={styles.story_mobile}>
-        <Project_Story txt={<InfraredTxt />} />
+        <Project_Story>
+          <InfraredTxt />
+        </Project_Story>
       </div>
     </div>
   );

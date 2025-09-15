@@ -2,7 +2,7 @@
   cursor: default;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, min(90vw, 360px));
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   gap: var(--spacing-SM);
 
@@ -11,4 +11,53 @@
   font-family: var(--font-lora);
   color: var(--font-color-main);
   opacity: 0.9;
+
+  /* Desired measure (newspaper-like) */
+  --measure-min: 30ch;
+  --measure-max: 45ch;
+
+  justify-items: start;
+  align-items: start;
+}
+
+/* Two-column layout on medium/large screens */
+@media only screen and (min-width: 56em) {
+  .popUpInformation {
+    /* Two columns, each constrained to 30–45ch */
+    grid-template-columns: repeat(
+      2,
+      minmax(var(--measure-min), var(--measure-max))
+    );
+  }
+}
+
+/* Readable spacing for text blocks */
+.popUpInformation p,
+.popUpInformation h4,
+.popUpInformation h5,
+.popUpInformation div {
+  margin: 0;
+}
+
+/* Compatibility class used by some text components */
+.popUpInformation_txt {
+  margin: 0;
+}
+
+/* Keep text blocks within the target measure */
+.popUpInformation > * {
+  max-width: var(--measure-max);
+}
+
+
+.popUpInformation p {
+  font-family: var(--font-lora);
+  color: var(--font-color-main);
+  hyphens: auto;
+  word-break: normal;
+}
+
+.popUpInformation span {
+  margin-top: var(--spacing-M);
+  font-family: var(--font-display);
 }

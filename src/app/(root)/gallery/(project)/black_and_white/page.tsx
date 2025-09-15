@@ -55,7 +55,9 @@ export default function Page() {
       />
       <ProjectGallery projectDir="black_and_white" />
       <div className={styles.story_mobile}>
-        <Project_Story txt={<BlackAndWhiteTxt />} />
+        <Project_Story>
+          <BlackAndWhiteTxt />
+        </Project_Story>
       </div>
     </div>
   );

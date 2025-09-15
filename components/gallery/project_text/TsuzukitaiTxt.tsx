@@ -3,18 +3,17 @@ import styles from "./text.module.css";
 
 function TsuzukitaiTxt() {
   return (
-    <div className={`${styles.popUpInformation} ${styles.open}`}>
-      <p className={styles.popUpInformation_txt}>
-        01 - 続きたい &#123;/ tsuzukitai /&#125; can have different
-        interpretation depending on the context. The first part 続きcan give the
-        idea of continuing something, to follow something But with たい it had
-        also the desire, the hope and the wish to...
+    <div className={`${styles.popUpInformation}`}>
+      <p>
+        01 - 続きたい (/tsuzukitai/) changes with context. 続き means to
+        continue, to keep going. With たい, it becomes a wish: I want to
+        continue. The word carries both action and desire in equal measure.
       </p>
-      <p className={styles.popUpInformation_txt}>
-        02 - Trapped memories is second name of this project and goes along with
-        the first one 続きたい. Between nostalgia and passed moments of
-        happiness that we are continuously coming back to in an infernal loop
-        that keeping us from continuing our hazardous journey;
+      <p>
+        02 - The other name of this project is Trapped Memories. It lives
+        between nostalgia and the pull of past joy. We circle old moments again
+        and again. It is gentle, and sometimes it holds us in place. The
+        photographs capture these quiet returns to what once was.
       </p>
     </div>
   );
